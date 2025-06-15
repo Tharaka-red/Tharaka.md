@@ -1,8 +1,8 @@
 async function githubCommand(sock, chatId) {
-    const repoInfo = `*🤖 KnightBot MD*
+    const repoInfo = `*🤖 Tharaka_md*
 
 *📂 GitHub Repository:*
-https://github.com/mruniquehacker/Knightbot-MD
+https://github.com/Tharaka-red/Tharaka.md.git
 
 *📢 Official Channel:*
 https://youtube.com/@mr_unique_hacker
