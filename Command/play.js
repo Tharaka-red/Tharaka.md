@@ -8,21 +8,26 @@ async function playCommand(sock, chatId, message) {
         
         if (!searchQuery) {
             return await sock.sendMessage(chatId, { 
-                text: "What song do you want to download?"
+                text: "☹️please provide song name"
             });
         }
+
+        // Send loading reaction
+        await sock.sendMessage(chatId, {
+            react: { text: '🎧', key: message.key }
+        });
 
         // Search for the song
         const { videos } = await yts(searchQuery);
         if (!videos || videos.length === 0) {
             return await sock.sendMessage(chatId, { 
-                text: "No songs found!"
+                text: "☹️No songs found!"
             });
         }
 
         // Send loading message
         await sock.sendMessage(chatId, {
-            text: "_Please wait your download is in progress_"
+            text: "_😊Please wait...._"
         });
 
         // Get the first video result
@@ -35,7 +40,7 @@ async function playCommand(sock, chatId, message) {
 
         if (!data || !data.status || !data.result || !data.result.downloadUrl) {
             return await sock.sendMessage(chatId, { 
-                text: "Failed to fetch audio from the API. Please try again later."
+                text: "☹️Failed to fetch audio from the API."
             });
         }
 
@@ -49,15 +54,20 @@ async function playCommand(sock, chatId, message) {
             fileName: `${title}.mp3`
         }, { quoted: message });
 
+        // Send success reaction
+        await sock.sendMessage(chatId, {
+            react: { text: '✅', key: message.key }
+        });
+
     } catch (error) {
         console.error('Error in song2 command:', error);
         await sock.sendMessage(chatId, { 
-            text: "Download failed. Please try again later."
+            text: "☹️Download failed."
         });
     }
 }
 
 module.exports = playCommand; 
 
-/*Powered by KNIGHT-BOT*
-*Credits to Keith MD*`*/
+/*Powered by DARCK_LINE_MD*
+*Credits to THARAKA-LAKSHAN*`*/
